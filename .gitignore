@@ -1,0 +1,7 @@
+#node modules directory
+
+node_modules/
+
+#uploads directory
+
+uploads/

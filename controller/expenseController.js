@@ -1,7 +1,7 @@
 //import mongoose from "mongoose";
 const mongoose = require('mongoose');
 //import user from '../model/usermodel';
-const student = require('../model/student');
+const expense = require('../model/expense');
 const multer = require('multer');
 const { request } = require('express');
 
@@ -13,18 +13,15 @@ const { request } = require('express');
 //import {sentEmail} from  '../middleware/sendmail'
 
 
-module.exports.student_reg = async (req, res) => { 
+module.exports.expense_reg = async (req, res) => { 
     
-   console.log(req.file.filename);
+ //  console.log(req.title);
 
 
-    const newstudent = new student({
-        name: req.body.name,
-        roll: req.body.roll,
-        registration: req.body.registration,
-        subjects: req.body.subjects,
-     //   registered_on: req.body.registered_on,
-        image:req.files.filename,
+    const newexpense = new expense({
+        title: req.body.title,
+        amount: req.body.amount,
+        date: req.body.date,   
 
     });
 
@@ -57,8 +54,8 @@ module.exports.student_reg = async (req, res) => {
 
 
 
-       await newstudent.save();
-        res.status(201).json(newstudent);
+       await newexpense.save();
+        res.status(201).json(newexpense);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
@@ -70,8 +67,8 @@ module.exports.student_reg = async (req, res) => {
 }
 
 
-module.exports.student_list = async (req, res) => {
-    let Details = await student.find({})
+module.exports.expense_list = async (req, res) => {
+    let Details = await expense.find({})
     console.log(Details)
 
     res.send({ status: 200, message: "success", result: Details })

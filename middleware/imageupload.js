@@ -27,24 +27,31 @@ const checkFileType = function (file, cb) {
 //import multer from 'multer';
 
 var storage = multer.diskStorage({
-    destination : function (req, file, cb){
-        cb(null, 'uploads')
-    },
-    filenames : function(req, file, cb){
-        console.log(file)
-        const ext = file.mimetype.split('/')[1];
-        cb(null,file.originalname )
+  destination: function (req, file, cb) {
+    //  cb(null, 'uploads')
+    // ********************************************************
+    if (file.fieldname == "image") {
+      cb(null, 'uploads')
     }
+    else {
+      // console.log("Image error")
+    }
+  },
+  filenames: function (req, file, cb) {
+   // console.log(file)
+    const ext = file.mimetype.split('/')[1];
+    cb(null, file.originalname)
+  }
 })
 //export const upload = multer({storage : storage})
 module.exports.uploadajay = multer(
   {
-    storage : storage,
-    limits: { fileSize: 10000000 }, 
+    storage: storage,
+    limits: { fileSize: 10000000 },
     fileFilter: (req, file, cb) => {
-    checkFileType(file, cb);
-  },
-  
+      checkFileType(file, cb);
+    },
+
   });
 
 

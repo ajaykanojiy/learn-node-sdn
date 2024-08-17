@@ -4,8 +4,9 @@ const express= require('express');
 const mongoose= require('mongoose');
 const app=express();
 const db=require('./db');
-const studentroute=require('./router/student')
-
+const studentroute=require('./router/student');
+const expenseroute=require('./router/expense');
+var cors = require('cors')
 //console.log('ajay');
 console.log(db.mongoconnection);
 db.mongoconnection();
@@ -16,12 +17,13 @@ db.mongoconnection();
     }
 )); */
 
-
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
 app.use('/students',studentroute)
+app.use('/expense',expenseroute)
 
 
 const port=9001;

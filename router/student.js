@@ -13,6 +13,11 @@ const router = express.Router();
 
 // router.post("/student_reg",imageUpload.single('image') ,studentcontroller.student_reg)
 router.post("/student_reg",imageUpload.array('image',3) ,studentcontroller.student_reg)
+
+//router.post("/student_reg",imageUpload.array([{name: 'image', maxCount: 10}]),studentcontroller.student_reg)
+
+
+
 router.get("/student_list",studentcontroller.student_list)
 router.get("/get_by_id/:id",studentcontroller.get_by_id)
 router.put("/student_update",studentcontroller.student_update)
